@@ -23,7 +23,7 @@ function validarCampo(){
 }
 
 function validarLongitud(campo){
-    console.log(campo.value.length);
+    
     if(campo.value.length > 0 ){
         campo.style.borderBottomColor = "gren";
         campo.classList.remove("error");
@@ -31,12 +31,6 @@ function validarLongitud(campo){
         campo.style.borderBottomColor = "red";
         campo.classList.add('error');
     }
-    if(campo.value.length > 0 ) {
-        campo.style.borderBottomColor = 'green';
-        campo.classList.remove('error');
-   } else {
-        campo.style.borderBottomColor = 'red';
-        campo.classList.add('error');
-   }
+    
 }
 

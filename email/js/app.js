@@ -2,6 +2,8 @@ const email = document.getElementById("email");
 const asunto = document.getElementById("asunto");
 const mensaje = document.getElementById("mensaje");
 const btnEnviar = document.getElementById("enviar");
+const formularioEnviar = document.getElementById('enviar-mail');
+const resetBtn = document.getElementById("resetBtn");
 
 eventListeners();
 
@@ -11,6 +13,9 @@ function eventListeners(){
     asunto.addEventListener("blur", validarCampo);
     mensaje.addEventListener("blur", validarCampo);
 
+    btnEnviar.addEventListener('click', enviarEmail);
+    resetBtn.addEventListener('click', resetFormulario);
+
 }
 
 function inicioApp(){
@@ -19,7 +24,53 @@ function inicioApp(){
 
 function validarCampo(){
     validarLongitud(this);
+    //validar unicamente el email
+    if(this.type === 'email'){
+        validarEmail(this);
+    }
+    let errores = document.querySelectorAll(".error");
+    if(email.value !== '' && asunto.value !== '' && mensaje.value !== ''){
+        if(errores.length === 0){
+            btnEnviar.disabled = false;
+        }
+    }
     
+}
+function enviarEmail(event){
+    
+    const spinnerGif = document.querySelector("#spinner");
+    spinnerGif.style.display = "block";
+    
+
+    const enviado = document.createElement('img');
+    enviado.src = 'img/mail.gif';
+    enviado.style.display = 'block';
+
+    setTimeout(function() {
+        spinnerGif.style.display = "none";
+
+        document.querySelector('#loaders').appendChild(enviado);
+        setTimeout(function(){
+            enviado.style.display = 'none';
+            formularioEnviar.reset();
+        }, 3000)
+    }, 3000)
+
+    event.preventDefault();
+
+}
+
+function validarEmail(campo) {
+    const mail = campo.value;
+    const validacion = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i; // expresión para validar correo
+ 
+    if(validacion.test(mail)){
+        campo.style.borderBottomColor = 'green',
+        campo.classList.remove('error');
+    } else {
+        campo.style.borderBottomColor = 'red',
+        campo.classList.add('error');
+    }
 }
 
 function validarLongitud(campo){
@@ -32,5 +83,11 @@ function validarLongitud(campo){
         campo.classList.add('error');
     }
     
+}
+
+function resetFormulario(event){
+    formularioEnviar.reset();
+    event.preventDefault();
+
 }
 

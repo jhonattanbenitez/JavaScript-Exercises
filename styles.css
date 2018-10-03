@@ -1,0 +1,116 @@
+body{
+    background: grey;
+}
+h1 {
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 50px;
+    padding: 80px 50px;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+  }
+    
+.insetshadow {
+    color: white;
+    background-color: #ffc600;
+    letter-spacing: 0.1em;
+    text-shadow: -1px -1px 1px #111, 2px 2px 1px #363636;
+  } .retroshadow {
+    color: #2c2c2c;
+    background-color: #d5d5d5;
+    letter-spacing: 0.05em;
+    text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
+  }
+  .rolldown-list {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    color: white
+  }
+  a{
+      text-decoration: none;
+      color: white;
+  }
+  .rolldown-list li {
+    padding: 1em;
+    margin-bottom: .125em;
+    display: block;
+    list-style: none;
+    text-transform: uppercase;
+    
+  }
+  
+  .rolldown-list li {
+    visibility: hidden;
+    -webkit-animation: rolldown .7s 1;
+            animation: rolldown .7s 1;
+    -webkit-transform-origin: 50% 0;
+            transform-origin: 50% 0;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+  }
+  
+  .rolldown-list li:nth-child(2n) {
+    background-color: #444;
+  }
+  
+  .rolldown-list li:nth-child(2n+1) {
+    background-color: #333;
+  }
+  
+  #myList {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    margin-left: -25%;
+  }
+  
+  #btnReload {
+    float: right;
+    color: #333;
+    background: #ccc;
+    text-transform: uppercase;
+    border: none;
+    padding: .5em 1em;
+  }
+  
+  #btnReload:hover {
+    background: #ddd;
+  }
+  
+  @-webkit-keyframes rolldown {
+    0% {
+      visibility: visible;
+      -webkit-transform: rotateX(180deg) perspective(500px);
+              transform: rotateX(180deg) perspective(500px);
+    }
+    70% {
+      visibility: visible;
+      -webkit-transform: rotateX(-20deg);
+              transform: rotateX(-20deg);
+    }
+    100% {
+      visibility: visible;
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+    }
+  }
+  
+  @keyframes rolldown {
+    0% {
+      visibility: visible;
+      -webkit-transform: rotateX(180deg) perspective(500px);
+              transform: rotateX(180deg) perspective(500px);
+    }
+    70% {
+      visibility: visible;
+      -webkit-transform: rotateX(-20deg);
+              transform: rotateX(-20deg);
+    }
+    100% {
+      visibility: visible;
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+    }
+  }
+  

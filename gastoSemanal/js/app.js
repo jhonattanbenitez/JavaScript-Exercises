@@ -1,5 +1,6 @@
 //Variables
 const presupuestoUsuario = prompt('¿Cuál es tu presupuesto semanal?');
+const formulario = document.getElementById('agregar-gasto');
 let cantidadPresupuesto;
 //Classes
 class Presupuesto{
@@ -12,6 +13,35 @@ class Presupuesto{
     }
 
 }
+//interfaz classes 
+class Interfaz {
+    insertarPresupuesto(cantidad){
+        console.log(cantidad);
+        const presupuestoSpan = document.querySelector('span#total');
+        const restanteSpan = document.querySelector('span#restante');
+
+        //insertar al html
+        presupuestoSpan.innerHTML =`${cantidad}`;
+        restanteSpan.innerHTML =`${cantidad}`;
+    }
+    imprimirMensaje(mensaje, tipo){
+       const divMensaje = document.createElement('div');
+       divMensaje.classList.add('text-center', 'alert');
+       if(tipo === 'error'){
+           divMensaje.classList.add('alert-danger');
+       }else{
+           divMensaje.classList.add('alert-succes');
+       }
+       divMensaje.appendChild(document.createTextNode(mensaje));
+       //insertar en el DOM
+       document.querySelector('.primario').insertBefore(divMensaje, formulario);
+       //quitar el alert después de 3 s
+       setTimeout(() => {
+           document.querySelector('.primario .alert').remove();
+           formulario.reset();
+       }, 3000);
+    }
+}
 
 
 //Event Listeners
@@ -21,6 +51,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     else{
         cantidadPresupuesto = new Presupuesto(presupuestoUsuario);
-        console.log(cantidadPresupuesto);
+        //instanciar la clase de Interfaz
+        const ui = new Interfaz();
+        ui.insertarPresupuesto(cantidadPresupuesto.presupuesto);
     }
-} )
+});
+
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault();
+    //leer del formulario de gastos 
+    const nombreGasto = document.querySelector('#gasto').value;
+    const cantidadGasto = document.querySelector('#cantidad').value;
+    //instanciar la interfaz 
+    const ui = new Interfaz();
+
+    if(nombreGasto === '' || cantidadGasto === ''){
+        //2 parametros, mensaje y tipo
+        ui.imprimirMensaje('Hubo un error', 'error');
+    }else{
+        console.log('gasto agregado');
+    }
+})
+

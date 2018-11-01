@@ -41,6 +41,45 @@ class Interfaz {
            formulario.reset();
        }, 3000);
     }
+    //inserta los gastos a la lista
+    agregarGastoListado(nombreGasto, cantidadGasto){
+        const gastosListado = document.querySelector('#gastos ul')
+        //crear li
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        //insertar gasto
+        li.innerHTML = `
+            ${nombreGasto}
+            <span class="badge badge-primary badge-pill"> $${cantidadGasto} </span>
+        `;
+        //insertar al HTML
+        gastosListado.appendChild(li);
+    }
+    //comprueba el presupuesto restante 
+    presupuestoRestante(cantidad){
+        console.log(cantidadPresupuesto);
+        const restante = document.querySelector('#restante');
+        const presupuestoRestanteUsuario = cantidadPresupuesto.presupuestoRestante(cantidad);
+        restante.innerHTML = `${presupuestoRestanteUsuario}`
+        this.comprobarPresupuesto();
+    }
+    //cambia de color el presupuesto restante
+    comprobarPresupuesto (){
+        const presupuestoTotal = cantidadPresupuesto.presupuesto;
+        const presupuestoRestante = cantidadPresupuesto.restante;
+        //comprobar el 25%
+        if((presupuestoTotal/4) > presupuestoRestante){
+            const restante = document.querySelector('.restante');
+            restante.classList.remove('alert-success', 'alert-warning');
+            restante.classList.add('alert-danger');
+        }else if((presupuestoTotal/ 2) > presupuestoRestante){
+            const restante = document.querySelector('.restante');
+            restante.classList.remove('alert-success');
+            restante.classList.add('alert-warning');
+        }
+
+
+    }
 }
 
 
@@ -69,7 +108,9 @@ formulario.addEventListener('submit', function(event) {
         //2 parametros, mensaje y tipo
         ui.imprimirMensaje('Hubo un error', 'error');
     }else{
-        console.log('gasto agregado');
+        ui.imprimirMensaje('Correcto', 'correcto');
+        ui.agregarGastoListado(nombreGasto, cantidadGasto)
+        ui.presupuestoRestante(cantidadGasto);
     }
 })
 

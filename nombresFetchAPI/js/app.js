@@ -2,7 +2,7 @@
 document.querySelector('#generar-nombre').addEventListener('submit', cargarNombres);
 
 // Llamado a Ajax e imprimir resultados
-function cargarNombres(e) {
+cargarNombres = (e) => {
      e.preventDefault();
 
      // Leer las variables

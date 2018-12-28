@@ -25,7 +25,7 @@ formulario.addEventListener('submit', (event) =>{
     }else {
         cotizador.obtenerValores(monedaSeleccionada, criptoMonedaSeleccionada)
         .then(data =>{
-            console.log(data);
+            ui.mostrarResultado(data.resultado.RAW, monedaSeleccionada, criptoMonedaSeleccionada);
         })
     }
 })

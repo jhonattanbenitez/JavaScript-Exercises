@@ -36,5 +36,8 @@ class Interfaz {
             document.querySelector('.mensajes div').remove();
         }, 3000);
     }
-   
+   //imprime el resultado de la cotización
+   mostrarResultado(resultado, moneda, crypto){
+        console.log(resultado[crypto][moneda]);
+   }
 }

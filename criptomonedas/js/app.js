@@ -22,5 +22,10 @@ formulario.addEventListener('submit', (event) =>{
 
     if(monedaSeleccionada === '' || criptoMonedaSeleccionada === ''){
         ui.mostrarMensaje('Ambos campos son obligatorios.', 'alert bg-danger text-center');
+    }else {
+        cotizador.obtenerValores(monedaSeleccionada, criptoMonedaSeleccionada)
+        .then(data =>{
+            console.log(data);
+        })
     }
 })

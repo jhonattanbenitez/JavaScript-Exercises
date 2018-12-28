@@ -13,4 +13,13 @@ class API {
             monedas
         }
     }
+    async obtenerValores(moneda, criptomoneda){
+        const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}&api_key=${this.apiKey}`;
+        //consultar en REST API
+        const urlConvertir = await fetch(url);
+        const resultado = await urlConvertir.json();
+        return {
+            resultado
+        }
+    }
 }

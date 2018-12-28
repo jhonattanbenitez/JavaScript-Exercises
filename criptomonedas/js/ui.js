@@ -38,6 +38,22 @@ class Interfaz {
     }
    //imprime el resultado de la cotización
    mostrarResultado(resultado, moneda, crypto){
-        console.log(resultado[crypto][moneda]);
+        const datosMoneda = resultado[crypto][moneda]
+        //recortar digitos de precio
+        let precio = datosMoneda.PRICE.toFixed(2);
+
+        //construir el template
+        let templateHTML =`
+            <div class="card bg-warning">
+                <div class="card-body text-light">
+                    <h2 class="card-title">Resultado:</h2>
+                    <p>El precio de ${datosMoneda.FROMSYMBOL} a moneda 
+                    ${datosMoneda.TOSYMBOL} es de: $ ${precio}
+                </div>
+            
+            </div>
+        `
+        //insertar el resultado
+        document.getElementById('resultado').innerHTML = templateHTML;
    }
 }

@@ -41,6 +41,8 @@ class Interfaz {
         const datosMoneda = resultado[crypto][moneda]
         //recortar digitos de precio
         let precio = datosMoneda.PRICE.toFixed(2);
+        let porcentaje = datosMoneda.CHANGEPCTDAY.toFixed(2);
+        let actualizado = new Date(datosMoneda.LASTUPDATE * 1000);
 
         //construir el template
         let templateHTML =`
@@ -48,7 +50,9 @@ class Interfaz {
                 <div class="card-body text-light">
                     <h2 class="card-title">Resultado:</h2>
                     <p>El precio de ${datosMoneda.FROMSYMBOL} a moneda 
-                    ${datosMoneda.TOSYMBOL} es de: $ ${precio}
+                    ${datosMoneda.TOSYMBOL} es de: $ ${precio}</p>
+                    <p>Variación último día: % ${porcentaje}</p>
+                    <p>Última actualización: ${actualizado} </p>
                 </div>
             
             </div>
